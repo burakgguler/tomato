@@ -9,6 +9,9 @@ class Profile(models.Model):
     biography = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.user.username
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
