@@ -1,3 +1,6 @@
+import json
+
+from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework.test import APITestCase
 
@@ -57,3 +60,27 @@ class UserRegistrationTestCase(APITestCase):
 
         response = self.client.get(self.register_url)
         self.assertEqual(403, response.status_code)
+
+
+class UserLoginTestCase(APITestCase):
+    login_url = reverse("token_obtain_pair")
+
+    def setUp(self):
+        self.data = {
+            "username": "buraktestcase",
+            "password": "buraktest123"
+        }
+        self.user = User.objects.create_user(username=self.data["username"], password=self.data["password"])
+
+    def test_user_token(self):
+        response = self.client.post(self.login_url, self.data)
+        self.assertEqual(200, response.status_code)
+        self.assertTrue("access" in json.loads(response.content))
+
+    def test_user_invalid_credentials(self):
+        response = self.client.post(self.login_url, {"username": "burakkk", "password": "wrongtest"})
+        self.assertEqual(401, response.status_code)
+
+    def test_user_no_data(self):
+        response = self.client.post(self.login_url, {"username": "", "password": ""})
+        self.assertEqual(400, response.status_code)
