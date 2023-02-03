@@ -17,6 +17,9 @@ class Restaurant(StarterModel):
     opening_time = models.IntegerField(null=True)
     closing_time = models.IntegerField(null=True)
 
+    class Meta:
+        ordering = ['-id']
+
     def get_slug(self):
         slug = slugify(self.name.replace('ı', 'i'))
         unique = slug
