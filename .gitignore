@@ -1,0 +1,5 @@
+tomato/__pycache__/
+
+tomato/settings.py
+
+db.sqlite3
