@@ -1,6 +1,7 @@
 from rest_framework.throttling import SimpleRateThrottle
 
 
+# could be AnonRateThrottle, UserRateThrottle
 class RegisterThrottle(SimpleRateThrottle):
     scope = 'register_throttle'
 
