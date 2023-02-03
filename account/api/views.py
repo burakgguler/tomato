@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 
 from account.api.permissions import IsNotAuthenticated
 from account.api.serializers import UserSerializer, ChangePasswordSerializer, RegisterSerializer
+from account.api.throttles import RegisterThrottle
 
 
 class ProfileView(RetrieveUpdateAPIView):
@@ -60,3 +61,4 @@ class CreateUserView(CreateAPIView):
     model = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = (IsNotAuthenticated,)
+    throttle_classes = (RegisterThrottle,)
