@@ -37,5 +37,3 @@ class CommentUpdateAPIView(DestroyModelMixin, UpdateAPIView, RetrieveAPIView):
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
-
-
