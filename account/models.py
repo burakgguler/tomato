@@ -3,8 +3,10 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from utils.models import StarterModel
 
-class Profile(models.Model):
+
+class Profile(StarterModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     biography = models.CharField(max_length=200, null=True, blank=True)
     url = models.CharField(max_length=200, null=True, blank=True)

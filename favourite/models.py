@@ -2,9 +2,10 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from restaurant.models import Restaurant
+from utils.models import StarterModel
 
 
-class Favourite(models.Model):
+class Favourite(StarterModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     content = models.CharField(max_length=120, null=True, blank=True)
