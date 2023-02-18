@@ -2,6 +2,8 @@ tomato/__pycache__/
 __pycache__/
 account/__pycache__/
 account/api/__pycache__/
+comment/api/__pycache__/
+favourite/__pycache__/
 
 tomato/settings.py
 

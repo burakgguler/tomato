@@ -9,5 +9,8 @@ class Favourite(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     content = models.CharField(max_length=120, null=True, blank=True)
 
+    class Meta:
+        ordering = ["-id"]
+
     def __str__(self):
         return self.user.username
