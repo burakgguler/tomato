@@ -18,6 +18,9 @@ class AbstractLocation(StarterModel):
 class Country(AbstractLocation):
     code = models.CharField(max_length=3, verbose_name=_("Country Code"), unique=True)
 
+    class Meta:
+        verbose_name_plural = _("Countries")
+
 
 class City(AbstractLocation):
     country = models.ForeignKey(Country, on_delete=models.PROTECT)
@@ -26,6 +29,7 @@ class City(AbstractLocation):
 
     class Meta:
         unique_together = (("country", "name"),)
+        verbose_name_plural = _("Cities")
 
 
 class Township(AbstractLocation):

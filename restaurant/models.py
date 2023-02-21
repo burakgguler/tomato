@@ -41,7 +41,16 @@ class Restaurant(StarterModel):
 class Cuisine(StarterModel):
     name = models.CharField(max_length=128, verbose_name=_("Cuisine Name"))
 
+    def __str__(self):
+        return self.name
+
 
 class RestaurantCuisine(StarterModel):
     cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = _("Restaurant Cuisines")
+
+    def __str__(self):
+        return self.restaurant.name + "/" + self.cuisine.name
