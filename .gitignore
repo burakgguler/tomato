@@ -4,6 +4,7 @@ account/__pycache__/
 account/api/__pycache__/
 comment/api/__pycache__/
 favourite/__pycache__/
+restaurant/__pycache__/
 
 tomato/settings.py
 
