@@ -8,27 +8,14 @@ from rest_framework.exceptions import ValidationError
 from utils.models import StarterModel
 
 
-class Tag(StarterModel):
-    caption = models.CharField(max_length=30, verbose_name=_("Caption"))
-
-    def __str__(self):
-        return self.caption
-
-
-class Cuisine(StarterModel):
-    name = models.CharField(max_length=128, verbose_name=_("Cuisine Name"))
-
-    def __str__(self):
-        return self.name
-
-
 class Restaurant(StarterModel):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1,
                                    verbose_name=_("Created By"), related_name="created_restaurants")
     modified_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
                                     verbose_name=_("Modified By"), related_name="modified_restaurants")
-    tags = models.ManyToManyField(Tag, related_name="restaurants", verbose_name=_("Tags"))
-    cuisines = models.ManyToManyField(Cuisine, related_name="restaurants", verbose_name=_("Cuisines"))
+    tags = models.ManyToManyField("restaurant.Tag", related_name="restaurants", verbose_name=_("Tags"))
+    features = models.ManyToManyField("restaurant.Feature", related_name="restaurants", verbose_name=_("Features"))
+    cuisines = models.ManyToManyField("restaurant.Cuisine", related_name="restaurants", verbose_name=_("Cuisines"))
     name = models.CharField(max_length=120, verbose_name=_("Restaurant Name"))
     location = models.CharField(max_length=255, verbose_name=_("Location"))
     slug = models.SlugField(db_index=True, unique=True, null=False, verbose_name=_("Slug"))
@@ -65,3 +52,24 @@ class Restaurant(StarterModel):
         self.validate_times()
 
         return super(Restaurant, self).save(*args, **kwargs)
+
+
+class Feature(StarterModel):
+    name = models.CharField(max_length=256, verbose_name=_("Restaurant Feature"))
+
+    def __str__(self):
+        return self.name
+
+
+class Tag(StarterModel):
+    caption = models.CharField(max_length=30, verbose_name=_("Caption"))
+
+    def __str__(self):
+        return self.caption
+
+
+class Cuisine(StarterModel):
+    name = models.CharField(max_length=128, verbose_name=_("Cuisine Name"))
+
+    def __str__(self):
+        return self.name
